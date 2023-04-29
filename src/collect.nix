@@ -7,9 +7,18 @@
     /*
     Modules declare an interface into a problem domain
     */
-    darwinModules = throw "not implemented yet";
-    nixosModules = throw "not implemented yet";
-    homeModules = throw "not implemented yet";
+    darwinModules = import ./generic-collect-sing.nix {
+      cellBlock = "darwinModules";
+      inherit nixpkgs inputs;
+    };
+    nixosModules = import ./generic-collect-sing.nix {
+      cellBlock = "nixosModules";
+      inherit nixpkgs inputs;
+    };
+    homeModules = import ./generic-collect-sing.nix {
+      cellBlock = "homeModules";
+      inherit nixpkgs inputs;
+    };
     shellModules = throw "not implemented yet";
     /*
     Profiles define values on that interface
@@ -46,7 +55,7 @@
       cellBlock = "homeConfigurations";
       inherit nixpkgs inputs;
     };
-    diskoConfigurations = import ./collect-disko.nix {
+    diskoConfigurations = import ./generic-collect-sing.nix {
       cellBlock = "diskoConfigurations";
       inherit nixpkgs inputs;
     };
